@@ -3,54 +3,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:background="#FC9"
-        android:gravity="center">
 
-        <TextView
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="welcome to webster"
+        android:textColor="#000"
+        android:textSize="40sp" />
 
+    <TextView
+
+        android:id="@+id/signin_Tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/welcome"
+        android:layout_margin="5dp"
+        android:text="Sign In"
+        android:textColor="#000"
+        android:textSize="30sp" />
+
+
+
+        <EditText
+            android:id="@+id/username_Et"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="welconme to webster"
-            android:textColor="#000"
-            android:textSize="20sp" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="66dp"
+            android:layout_below="@id/signin_Tv"
+            android:hint="Username" />
 
-    </RelativeLayout>
 
-    <Button
-        android:id="@+id/login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="193dp"
-        android:text="Login" />
+        <EditText
+            android:id="@+id/password_Et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/username_Et"
+            android:layout_centerHorizontal="true"
+            android:hint="Password"
+            android:inputType="textPassword" />
 
-    <TextView
-        android:id="@+id/password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/login"
-        android:layout_alignEnd="@+id/login"
-        android:layout_alignRight="@+id/login"
-        android:layout_marginBottom="52dp"
-        android:text="Password"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/password"
-        android:layout_alignEnd="@+id/login"
-        android:layout_alignRight="@+id/login"
-        android:layout_marginBottom="40dp"
-        android:text="username"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        <Button
+            android:id="@+id/SignIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/password_Et"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="193dp"
+            android:text="Sign In" />
+
 
 </RelativeLayout>
