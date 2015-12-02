@@ -16,10 +16,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.ksoap2.SoapEnvelope;
+import org.ksoap2.serialization.PropertyInfo;
+import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapPrimitive;
+import org.ksoap2.serialization.SoapSerializationEnvelope;
+import org.ksoap2.transport.AndroidHttpTransport;
 
 public class SignIn extends Activity implements View.OnClickListener {
 
-    Private static final String
+    private static final String SOAP_NAMESPACE ="";
+    private static final String SOAP_URL="http://12.216.193.170/mobilePOC/?WSDL";
+    private static final String SOAP_ACTION="";
+    private static final String SOAP_METHOD_NAME="";
+
+    private PropertyInfo pi1;
+
+    private PropertyInfo pi2;
+
+
     // User name
     EditText mUsername;
     // Password
@@ -37,6 +51,33 @@ public class SignIn extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_signin);
         mSignIn = (Button) findViewById(R.id.SignIn);
         mSavings = (Button) findViewById(R.id.Savings);
+
+
+
+        mUsername = (EditText) findViewById(R.id.username_Et);
+        mPassword = (EditText) findViewById(R.id.password_Et);
+        String uname = mUsername.getText().toString();
+        String pass = mPassword.getText().toString();
+
+        SoapObject Request = new SoapObject(SOAP_NAMESPACE, SOAP_METHOD_NAME);
+        pi1 = new PropertyInfo();
+        /*pi1.setValue(uname.getText().toString());//get the string that is to be sent to the web service
+*/
+
+
+        Request.addProperty("pi1", "uname");
+        SoapSerializationEnvelope soapEnvolpe = new SoapSerializationEnvelope(SoapEnvelope.VER10);
+        SoapEnvelope.dotNet = true;
+        soapEnvolpe.setOutputSoapObject(Request);
+        AndroidHttpTransport aht =new AndroidHttpTransport(SOAP_URL);
+        try
+        {
+            aht.call(SOAP_ACTION, soapEnvolpe);
+            SoapPrimitive resultString =(SoapPrimitive)SoapEnvelope.getResponse();
+
+
+
+        }
 
 
 
