@@ -4,13 +4,14 @@ package com.sourcebits.webster.websterbank;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentManager;
+import com.sourcebits.webster.websterbank.LoansFragment;
 
 /**
  * Created by Bhargava Gugamsetty on 11/27/2015.
  */
-public class TabsPagerAdapter extends FragmentPagerAdapter {
+public class WebsterPagerAdapter extends FragmentPagerAdapter {
 
-    public TabsPagerAdapter(FragmentManager fm) {
+    public WebsterPagerAdapter(FragmentManager fm) {
         super(fm);
     }
 
@@ -26,7 +27,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
                 return new CheckingsFragement();
             case 2:
                 // Loans fragment activity
-                return new LoansFragment();
+             return new LoansFragment();
         }
 
         return null;

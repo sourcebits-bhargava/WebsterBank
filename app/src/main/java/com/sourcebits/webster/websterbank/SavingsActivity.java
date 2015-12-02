@@ -5,16 +5,18 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+
 
 /**
  * Created by Bhargava Gugamsetty on 11/26/2015.
  */
 
-public class SavingsActivity extends FragmentActivity implements
+public class SavingsActivity extends AppCompatActivity implements
         ActionBar.TabListener {
 
     private ViewPager viewPager;
-    private TabsPagerAdapter mAdapter;
+    private WebsterPagerAdapter mAdapter;
     private ActionBar actionBar;
     // Tab titles
     private String[] tabs = { "Savings", "Loans", "Checkings" };
@@ -26,11 +28,12 @@ public class SavingsActivity extends FragmentActivity implements
 
         // Initilization
         viewPager = (ViewPager) findViewById(R.id.pager);
-        actionBar = getActionBar();
-        mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+       // actionBar = getActionBar();
+        mAdapter = new WebsterPagerAdapter(getSupportFragmentManager());
 
         viewPager.setAdapter(mAdapter);
-        actionBar.setHomeButtonEnabled(false);
+        actionBar = getSupportActionBar();
+        //actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         // Adding Tabs

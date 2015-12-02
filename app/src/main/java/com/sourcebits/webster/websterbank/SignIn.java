@@ -15,28 +15,44 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.ksoap2.SoapEnvelope;
+
 public class SignIn extends Activity implements View.OnClickListener {
+
+    Private static final String
     // User name
     EditText mUsername;
     // Password
     EditText mPassword;
     // Sign In
     Button mSignIn;
+    Button mSavings;
     // Message
     TextView mMessage;
+    DbHelper mydb = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_Signin);
+        setContentView(R.layout.activity_signin);
         mSignIn = (Button) findViewById(R.id.SignIn);
+        mSavings = (Button) findViewById(R.id.Savings);
+
+
 
     }
 
 
+
     @Override
     public void onClick(View v) {
+
+        //to open savings screen
+
+
         switch (v.getId()) {
+
+
             case R.id.SignIn:
                 mUsername = (EditText) findViewById(R.id.username_Et);
                 mPassword = (EditText) findViewById(R.id.password_Et);
@@ -58,21 +74,46 @@ public class SignIn extends Activity implements View.OnClickListener {
                 }
                 break;
 
-            case R.id.buttonNewUser:
+            case R.id.Savings: {
+                Toast.makeText(getApplicationContext(), "Savings Activity", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(SignIn.this,SavingsActivity.class);
+                startActivity(intent);
+                finish();
+            }
+            break;
+
+
+
+
+
+/*
+            case R.id.2:
                 Intent i = new Intent(SignIn.this, NewUserActivity.class);
                 startActivity(i);
                 finish();
                 break;
 
-            case R.id.buttonShowAll:
+            case R.id.3:
                 Intent i_admin = new Intent(SignIn.this, AdminPage.class);
                 startActivity(i_admin);
                 finish();
-                break;
+                break;*/
         }
 
 
     }
+
+
+
+    /* arraylist
+    private void AddUser() {
+
+		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+
+
+	   	nameValuePairs.add(new BasicNameValuePair("name", uname.getText().toString()));
+	   	nameValuePairs.add(new BasicNameValuePair("pass", pwd.getText().toString()));
+   */
 
     public boolean validateLogin(String uname, String pass, Context context) {
 
@@ -110,6 +151,7 @@ public class SignIn extends Activity implements View.OnClickListener {
 
     public void onDestroy() {
         super.onDestroy();
+        if(mydb != null)
         mydb.close();
     }
 }

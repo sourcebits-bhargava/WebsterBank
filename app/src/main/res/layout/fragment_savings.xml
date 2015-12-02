@@ -2,14 +2,63 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fa6a6a"
+    android:background="#ffffff"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:text="Design Savings Screen"
-        android:textSize="20dp" />
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/Savings_welcome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/appbar_bg_savings"
+                android:paddingLeft="72dp"
+                android:paddingRight="109dp"
+                android:paddingTop="40dp"
+                android:text="Savings"
+                android:textColor="#deffffff"
+                android:textSize="20dp" />
+
+            <TextView
+
+                android:id="@+id/savings_cont1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Savings_welcome"
+                android:background="@drawable/account_container"
+                android:paddingBottom="17dp"
+                android:paddingLeft="98dp"
+                android:paddingTop="55dp"
+                android:text="Premier Savings"
+                android:textColor="#333333"
+                android:textSize="18dp" />
+
+            <TextView
+
+                android:id="@+id/signin_Tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_below="@+id/savings_cont1"
+                android:background="@drawable/account_container"
+                android:paddingBottom="17dp"
+                android:paddingLeft="98dp"
+
+                android:paddingTop="55dp"
+                android:text="Personal Savings"
+                android:textColor="#333333"
+                android:textSize="18dp" />
+
+
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>
+

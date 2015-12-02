@@ -3,58 +3,100 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/welcome"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:background="@drawable/appbar_bg"
+
+        android:paddingLeft="20dp"
+        android:paddingTop="16dp"
         android:text="welcome to webster"
-        android:textColor="#000"
-        android:textSize="40sp" />
+        android:textColor="#deffffff"
+        android:textSize="30dp" />
 
     <TextView
 
         android:id="@+id/signin_Tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/welcome"
-        android:layout_margin="5dp"
+        android:layout_alignLeft="@+id/welcome"
+        android:layout_alignStart="@+id/welcome"
+        android:layout_below="@+id/welcome"
+        android:background="@drawable/sign_in_header"
+        android:paddingBottom="17dp"
+        android:paddingLeft="16dp"
+
+        android:paddingTop="55dp"
         android:text="Sign In"
-        android:textColor="#000"
-        android:textSize="30sp" />
+        android:textSize="24sp" />
 
 
-
-        <EditText
-            android:id="@+id/username_Et"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="66dp"
-            android:layout_below="@id/signin_Tv"
-            android:hint="Username" />
-
-
-        <EditText
-            android:id="@+id/password_Et"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/username_Et"
-            android:layout_centerHorizontal="true"
-            android:hint="Password"
-            android:inputType="textPassword" />
+    <EditText
+        android:id="@+id/username_Et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/signin_Tv"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:textSize="16dp"
+        android:hint="Username" />
 
 
-        <Button
-            android:id="@+id/SignIn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_below="@id/password_Et"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="193dp"
-            android:text="Sign In" />
+    <EditText
+        android:id="@+id/password_Et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/username_Et"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:textSize="16dp"
+        android:hint="Password"
+        android:inputType="textPassword" />
 
 
+    <Button
+        android:id="@+id/SignIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/password_Et"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/sign_in_button"
+        android:onClick="onClick"
+        android:textSize="18dp"
+        android:text="Sign In" />
+
+    <Button
+        android:id="@+id/Savings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/SignIn"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:onClick="onClick"
+        android:paddingLeft="10dp"
+        android:text="Savings" />
+
+    <ToggleButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New ToggleButton"
+        android:id="@+id/toggleButton"
+        android:layout_alignBottom="@+id/Savings"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+
+</RelativeLayout>
+    </ScrollView>
 </RelativeLayout>
