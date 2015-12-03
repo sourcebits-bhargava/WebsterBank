@@ -67,10 +67,10 @@ public class SignIn extends Activity implements View.OnClickListener {
 //-----------soap
         mUsername = (EditText) findViewById(R.id.username_Et);
         mPassword = (EditText) findViewById(R.id.password_Et);
-       // String  uname = mUsername.getText().toString();
+        // String  uname = mUsername.getText().toString();
         uname = mUsername.getText().toString();
 
-      //  String pass = mPassword.getText().toString();
+        //  String pass = mPassword.getText().toString();
         pass = mPassword.getText().toString();
         mSignTv = (TextView) findViewById(R.id.signin_Tv);
 // --------------soap
@@ -84,86 +84,10 @@ public class SignIn extends Activity implements View.OnClickListener {
 
 //----------SOAP object request with instance
 
-       // SoapObject Request = new SoapObject(SOAP_NAMESPACE, SOAP_METHOD_NAME); //SOAP object for username
+        // SoapObject Request = new SoapObject(SOAP_NAMESPACE, SOAP_METHOD_NAME); //SOAP object for username
         //pi1 = new PropertyInfo();
         //   pi1.setValue(uname.getText().toString());//get the string that is to be sent to the web service
     }
-
-    private class myAsyncTask extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
-            mSignTv.setText(response);
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-
-
-
-            // Call the webservices with two parameters
-
-            SoapObject Request = new SoapObject(SOAP_NAMESPACE, SOAP_METHOD_NAME); //SOAP object for username
-             //  pi1.setValue(uname.getText().toString());
-            pi1.setValue(uname); //get the string that is to be sent to the web service
-           // pi2.setValue(pass.getText().toString());
-            pi2.setValue(pass);
-
-
-            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-            soapEnvelope.dotNet = true;
-            envelope.setOutputSoapObject(Request);
-
-            AndroidHttpTransport httpTransport = new AndroidHttpTransport(SOAP_URL);
-            httpTransport.debug = true;
-
-
-            try {
-                httpTransport.call(SOAP_ACTION, envelope);
-            } catch (HttpResponseException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (XmlPullParserException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } //send request
-            SoapObject result = null;
-            try {
-                result = (SoapObject) envelope.getResponse();
-            } catch (SoapFault e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-
-            Log.d("App", "" + result.getProperty(1).toString());
-            response = result.getProperty(1).toString();
-            return null;
-
-        }
-    }
-
-
-/*
-    SoapSerializationEnvelope soapEnvolpe = new SoapSerializationEnvelope(SoapEnvelope.VER10);
-        SoapEnvelope.dotNet = false;
-
-    AndroidHttpTransport aht =new AndroidHttpTransport(SOAP_URL);
-        try
-        {
-          //  aht.call(SOAP_ACTION, soapEnvolpe);
-            SoapPrimitive resultString =(SoapPrimitive)SoapEnvelope.getResponse();
-        }
-    }
-*/
 
     @Override
     public void onClick(View v) {
@@ -203,10 +127,6 @@ public class SignIn extends Activity implements View.OnClickListener {
             }
             break;
 
-
-
-
-
 /*
             case R.id.2:
                 Intent i = new Intent(SignIn.this, NewUserActivity.class);
@@ -223,6 +143,85 @@ public class SignIn extends Activity implements View.OnClickListener {
 
 
     }
+    private class myAsyncTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            mSignTv.setText(response);
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+
+            // Call the webservices with two parameters property info
+
+            SoapObject Request = new SoapObject(SOAP_NAMESPACE, SOAP_METHOD_NAME); //SOAP object for username
+            //  pi1.setValue(uname.getText().toString());
+            pi1.setValue(uname);
+            //get the string that is to be sent to the web service
+            // pi2.setValue(pass.getText().toString());
+            pi2.setValue(pass);
+
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.setOutputSoapObject(Request);
+
+            AndroidHttpTransport httpTransport = new AndroidHttpTransport(SOAP_URL);
+            httpTransport.debug = true;
+
+
+            try {
+                httpTransport.call(SOAP_ACTION, envelope);
+            }  catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (XmlPullParserException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            //send request
+            SoapObject result = null;
+            try {
+                result = (SoapObject) envelope.getResponse();
+
+
+            } catch (SoapFault e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+            Log.d("App", "" + result.getProperty(1).toString());
+            response = result.getProperty(1).toString();
+            return null;
+
+        }
+    }
+
+
+/*
+    SoapSerializationEnvelope soapEnvolpe = new SoapSerializationEnvelope(SoapEnvelope.VER10);
+        SoapEnvelope.dotNet = false;
+
+    AndroidHttpTransport aht =new AndroidHttpTransport(SOAP_URL);
+        try
+        {
+          //  aht.call(SOAP_ACTION, soapEnvolpe);
+            SoapPrimitive resultString =(SoapPrimitive)SoapEnvelope.getResponse();
+        }
+    }
+*/
+
+
 
 
 
@@ -273,8 +272,8 @@ public class SignIn extends Activity implements View.OnClickListener {
 
     public void onDestroy() {
         super.onDestroy();
-        if (mydb != null)
-            mydb.close();
+      /*  if (mydb != null)
+            mydb.close();*/
     }
 }
 
