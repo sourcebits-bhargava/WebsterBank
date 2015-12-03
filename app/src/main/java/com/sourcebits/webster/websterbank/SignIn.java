@@ -76,12 +76,6 @@ public class SignIn extends Activity implements View.OnClickListener {
 // --------------soap
 
 
-        //Soap Object request using async task
-
-        myAsyncTask myRequest = new myAsyncTask();
-        myRequest.execute();
-
-
 //----------SOAP object request with instance
 
         // SoapObject Request = new SoapObject(SOAP_NAMESPACE, SOAP_METHOD_NAME); //SOAP object for username
@@ -112,6 +106,11 @@ public class SignIn extends Activity implements View.OnClickListener {
                     boolean validLogin = validateLogin(uname, pass, SignIn.this);
                     if (validLogin) {
                         System.out.println("In Valid");
+                        //Soap Object request using async task
+
+                        myAsyncTask myRequest = new myAsyncTask();
+                       // myRequest.execute();
+
                         Intent i = new Intent(SignIn.this, SavingsActivity.class);
                         startActivity(i);
                         finish();
@@ -143,6 +142,8 @@ public class SignIn extends Activity implements View.OnClickListener {
 
 
     }
+
+    //Soap-------------------------
     private class myAsyncTask extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -166,9 +167,11 @@ public class SignIn extends Activity implements View.OnClickListener {
 
             SoapObject Request = new SoapObject(SOAP_NAMESPACE, SOAP_METHOD_NAME); //SOAP object for username
             //  pi1.setValue(uname.getText().toString());
+            pi1 = new PropertyInfo();
             pi1.setValue(uname);
             //get the string that is to be sent to the web service
             // pi2.setValue(pass.getText().toString());
+            pi2 = new PropertyInfo();
             pi2.setValue(pass);
 
 
@@ -182,7 +185,7 @@ public class SignIn extends Activity implements View.OnClickListener {
 
             try {
                 httpTransport.call(SOAP_ACTION, envelope);
-            }  catch (IOException e) {
+            } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             } catch (XmlPullParserException e) {
@@ -207,6 +210,7 @@ public class SignIn extends Activity implements View.OnClickListener {
         }
     }
 
+//soap
 
 /*
     SoapSerializationEnvelope soapEnvolpe = new SoapSerializationEnvelope(SoapEnvelope.VER10);
@@ -237,6 +241,16 @@ public class SignIn extends Activity implements View.OnClickListener {
 
 
     public boolean validateLogin(String uname, String pass, Context context) {
+
+        if (uname == "myuser")
+
+        {
+            return true;
+        }
+        else
+            return false;
+/*
+
         DbHelper mydb = null;
         mydb = new DbHelper(context);
         SQLiteDatabase db = mydb.getReadableDatabase();
@@ -267,13 +281,17 @@ public class SignIn extends Activity implements View.OnClickListener {
         }
 
 
-        return true;
+            return true;
+        */
+
     }
 
+/*
     public void onDestroy() {
         super.onDestroy();
-      /*  if (mydb != null)
-            mydb.close();*/
+        if (mydb != null)
+            mydb.close();
     }
+*/
 }
 

@@ -2,16 +2,74 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#17df0d"
+    android:background="#ffffff"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:text="Design Loans Screen"
-        android:textSize="20dp" />
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/Loans_welcome1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/appbar_bg_savings"
+                android:paddingLeft="72dp"
+                android:paddingRight="109dp"
+                android:paddingTop="40dp"
+                android:text="Loans"
+                android:textColor="#deffffff"
+                android:textSize="20dp" />
+
+            <TextView
+
+                android:id="@+id/savings_cont1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Loans_welcome1"
+                android:background="@drawable/account_container"
+                android:paddingBottom="17dp"
+                android:paddingLeft="98dp"
+                android:paddingTop="55dp"
+                android:text="Premier Savings"
+                android:textColor="#333333"
+                android:textSize="18dp" />
+
+            <TextView
+
+                android:id="@+id/signin_Tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_below="@+id/savings_cont1"
+                android:background="@drawable/account_container"
+                android:paddingBottom="17dp"
+                android:paddingLeft="98dp"
+
+                android:paddingTop="55dp"
+                android:text="Personal Savings"
+                android:textColor="#333333"
+                android:textSize="18dp" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ic_appbar"
+                android:layout_alignParentTop="true"
+                android:paddingLeft="16dp"
+                android:paddingTop="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:background="@drawable/ic_appbar_hub_normal"/>
 
 
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>
+
