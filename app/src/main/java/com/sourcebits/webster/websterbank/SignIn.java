@@ -36,6 +36,9 @@ public class SignIn extends Activity implements View.OnClickListener {
     private EditText mPassword;
     private Button mSignIn;
     private Button mSavings;
+    private String uname;
+    private String pass;
+
 
     //variables for soap start-----------
 
@@ -43,6 +46,9 @@ public class SignIn extends Activity implements View.OnClickListener {
     private static final String SOAP_URL = "http://12.216.193.170/mobilePOC/?WSDL";
     private static final String SOAP_ACTION = "http://schemas.wbstpoc.com/2015/01/WBSTMobileInterface/";
     private static final String SOAP_METHOD_NAME = "getAccountHistory";
+    private String response;
+    private TextView mSignTv;
+
     //method names getAccountHistory, getAccounts,loginUser,authenticate
     private PropertyInfo pi1;
     private PropertyInfo pi2;  /// variables for SOAP
@@ -61,9 +67,12 @@ public class SignIn extends Activity implements View.OnClickListener {
 //-----------soap
         mUsername = (EditText) findViewById(R.id.username_Et);
         mPassword = (EditText) findViewById(R.id.password_Et);
-        String uname = mUsername.getText().toString();
-        String pass = mPassword.getText().toString();
-        tv = (TextView) findViewById(R.id.txt2);
+       // String  uname = mUsername.getText().toString();
+        uname = mUsername.getText().toString();
+
+      //  String pass = mPassword.getText().toString();
+        pass = mPassword.getText().toString();
+        mSignTv = (TextView) findViewById(R.id.signin_Tv);
 // --------------soap
 
 
@@ -85,7 +94,7 @@ public class SignIn extends Activity implements View.OnClickListener {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-            tv.setText(response);
+            mSignTv.setText(response);
         }
 
         @Override
@@ -109,7 +118,7 @@ public class SignIn extends Activity implements View.OnClickListener {
 
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
             soapEnvelope.dotNet = true;
-            envelope.setOutputSoapObject(request);
+            envelope.setOutputSoapObject(Request);
 
             AndroidHttpTransport httpTransport = new AndroidHttpTransport(SOAP_URL);
             httpTransport.debug = true;
