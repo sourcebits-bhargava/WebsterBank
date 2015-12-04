@@ -26,6 +26,7 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.AndroidHttpTransport;
+import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
@@ -38,8 +39,10 @@ public class SignIn extends Activity implements View.OnClickListener {
     private Button mSavings;
     private String uname;
     private String pass;
+    private Authenticator taskAuthenticator;
+    private TextView savingCont;
 
-
+/*
     //variables for soap start-----------
 
     private static final String SOAP_NAMESPACE = "http://schemas.wbstpoc.com/2015/01/WBSTMobileInterface";
@@ -54,7 +57,7 @@ public class SignIn extends Activity implements View.OnClickListener {
     private PropertyInfo pi2;  /// variables for SOAP
 
     // variables for soap completed---------
-
+*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,24 +66,27 @@ public class SignIn extends Activity implements View.OnClickListener {
         mSignIn = (Button) findViewById(R.id.SignIn);
         mSavings = (Button) findViewById(R.id.Savings);
 
-
+/*
 //-----------soap
         mUsername = (EditText) findViewById(R.id.username_Et);
         mPassword = (EditText) findViewById(R.id.password_Et);
         // String  uname = mUsername.getText().toString();
-        uname = mUsername.getText().toString();
+
+
 
         //  String pass = mPassword.getText().toString();
         pass = mPassword.getText().toString();
         mSignTv = (TextView) findViewById(R.id.signin_Tv);
 // --------------soap
-
-
+*/
+/*
 //----------SOAP object request with instance
 
         // SoapObject Request = new SoapObject(SOAP_NAMESPACE, SOAP_METHOD_NAME); //SOAP object for username
         //pi1 = new PropertyInfo();
         //   pi1.setValue(uname.getText().toString());//get the string that is to be sent to the web service
+
+        */
     }
 
     @Override
@@ -98,25 +104,30 @@ public class SignIn extends Activity implements View.OnClickListener {
 
                 String uname = mUsername.getText().toString();
                 String pass = mPassword.getText().toString();
+
+
                 if (uname.equals("") || uname == null) {
                     Toast.makeText(getApplicationContext(), "Username Empty", Toast.LENGTH_SHORT).show();
                 } else if (pass.equals("") || pass == null) {
                     Toast.makeText(getApplicationContext(), "Password Empty", Toast.LENGTH_SHORT).show();
                 } else {
+
+                 /*
                     boolean validLogin = validateLogin(uname, pass, SignIn.this);
                     if (validLogin) {
                         System.out.println("In Valid");
                         //Soap Object request using async task
+*/
 
-                        myAsyncTask myRequest = new myAsyncTask();
-                       // myRequest.execute();
+                   // myAsyncTask myRequest = new myAsyncTask();
+                   // myRequest.execute();
 
-                        Intent i = new Intent(SignIn.this, SavingsActivity.class);
-                        startActivity(i);
-                        finish();
-                    }
+                    taskAuthenticator=new Authenticator(uname,pass);
+                    taskAuthenticator.execute();
+
                 }
                 break;
+
 
             case R.id.Savings: {
                 Toast.makeText(getApplicationContext(), "Savings Activity", Toast.LENGTH_SHORT).show();
@@ -143,13 +154,83 @@ public class SignIn extends Activity implements View.OnClickListener {
 
     }
 
-    //Soap-------------------------
+//Soap-------------------------
+
+
+    private class Authenticator extends AsyncTask{
+
+        private String mUserName, password;
+
+        private static final String NAMESPACE = "http://schemas.wbstpoc.com/2015/01/WBSTMobileInterface";
+        private static final String URL = "http://12.216.193.170/mobilePOC/?WSDL";
+        private static final String SOAP_ACTION = "http://schemas.wbstpoc.com/2015/01/WBSTMobileInterface/";
+        private static final String METHOD_NAME = "getAccountHistory";
+
+        public Authenticator(String user, String password){
+            this.mUserName=user;
+            this.password=password;
+        }
+
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+
+            Log.d("App", "doing in background");
+            SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
+            request.addProperty("userName",this.mUserName);
+            request.addProperty("password",this.password);
+
+
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            envelope.setOutputSoapObject(request);
+            // Says that the soap webservice is a .Net service
+            envelope.dotNet = true;
+
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
+
+            try {
+                androidHttpTransport.call(SOAP_ACTION, envelope);
+
+                //SoapPrimitive  resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
+                // SoapPrimitive  resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
+                SoapObject resultsRequestSOAP = (SoapObject) envelope.bodyIn;
+
+
+               // savingCont.setText(resultsRequestSOAP.toString());
+              //  System.out.println("Response::"+resultsRequestSOAP.toString());
+
+            } catch (Exception e) {
+                System.out.println("Error"+e);
+            }
+
+
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Log.d("App", "Pre execute");
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            super.onPostExecute(o);
+            Log.d("App", "post execute");
+            Intent i = new Intent(SignIn.this, SavingsActivity.class);
+            startActivity(i);
+
+            finish();
+        }
+    }
+/*
     private class myAsyncTask extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-            mSignTv.setText(response);
+//            mSignTv.setText(response);
         }
 
         @Override
@@ -159,10 +240,13 @@ public class SignIn extends Activity implements View.OnClickListener {
             super.onPreExecute();
         }
 
+
         @Override
         protected Void doInBackground(Void... voids) {
-
-
+            return null;
+        }
+        */
+/*
             // Call the webservices with two parameters property info
 
             SoapObject Request = new SoapObject(SOAP_NAMESPACE, SOAP_METHOD_NAME); //SOAP object for username
@@ -212,6 +296,8 @@ public class SignIn extends Activity implements View.OnClickListener {
 
         }
     }
+*/
+
 
 //soap
 
@@ -242,7 +328,7 @@ public class SignIn extends Activity implements View.OnClickListener {
 	   	nameValuePairs.add(new BasicNameValuePair("pass", pwd.getText().toString()));
    */
 
-
+/*
     public boolean validateLogin(String uname, String pass, Context context) {
 
         if (uname == "myuser")
@@ -252,6 +338,8 @@ public class SignIn extends Activity implements View.OnClickListener {
         }
         else
             return false;
+        */
+
 /*
 
         DbHelper mydb = null;
@@ -285,9 +373,10 @@ public class SignIn extends Activity implements View.OnClickListener {
 
 
             return true;
+              }
         */
 
-    }
+
 
 /*
     public void onDestroy() {
@@ -296,5 +385,6 @@ public class SignIn extends Activity implements View.OnClickListener {
             mydb.close();
     }
 */
-}
+    }
+
 
