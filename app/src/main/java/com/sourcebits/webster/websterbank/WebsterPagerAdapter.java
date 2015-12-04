@@ -27,7 +27,9 @@ public class WebsterPagerAdapter extends FragmentPagerAdapter {
                 return new CheckingsFragement();
             case 2:
                 // Loans fragment activity
-             //return new LoansFragment();
+                 return new LoansFragment();
+            default:
+                break;
         }
 
         return null;

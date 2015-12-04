@@ -167,6 +167,7 @@ public class SignIn extends Activity implements View.OnClickListener {
 
             SoapObject Request = new SoapObject(SOAP_NAMESPACE, SOAP_METHOD_NAME); //SOAP object for username
             //  pi1.setValue(uname.getText().toString());
+            //request.addProperty("username", "uname");
             pi1 = new PropertyInfo();
             pi1.setValue(uname);
             //get the string that is to be sent to the web service
@@ -188,8 +189,8 @@ public class SignIn extends Activity implements View.OnClickListener {
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
-            } catch (XmlPullParserException e) {
-                // TODO Auto-generated catch block
+            }
+            catch (Exception e) {
                 e.printStackTrace();
             }
             //send request
@@ -202,6 +203,8 @@ public class SignIn extends Activity implements View.OnClickListener {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
+
+
 
             Log.d("App", "" + result.getProperty(1).toString());
             response = result.getProperty(1).toString();

@@ -13,8 +13,9 @@ import android.view.ViewGroup;
  * Created by Bhargava Gugamsetty on 11/27/2015.
  */
 
-@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-public class LoansFragment extends Fragment {
+
+public class LoansFragment extends  android.support.v4.app.Fragment {
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -23,6 +24,7 @@ public class LoansFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_loans, container, false);
 
         return rootView;
+
     }
 
 }

@@ -19,7 +19,9 @@ public class SavingsActivity extends AppCompatActivity implements
     private WebsterPagerAdapter mAdapter;
     private ActionBar actionBar;
     // Tab titles
-    private String[] tabs = { "Savings", "Loans", "Checkings" };
+    private String[] tabs = { "Savings", "Checkings", "Loans" };
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,11 @@ public class SavingsActivity extends AppCompatActivity implements
         actionBar = getSupportActionBar();
         //actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+/*
+        actionBar.addTab(actionBar.newTab().setText("Savings").setTabListener(this));
+        actionBar.addTab(actionBar.newTab().setText("Loans").setTabListener(this));
+        actionBar.addTab(actionBar.newTab().setText("Checkings").setTabListener(this));
+        */
 
         // Adding Tabs
         for (String tab_name : tabs) {

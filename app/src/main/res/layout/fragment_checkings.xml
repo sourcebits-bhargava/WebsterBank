@@ -19,7 +19,7 @@
                 android:id="@+id/Checking_welcome1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/appbar_bg_savings"
+                android:background="@drawable/appbar_bg_checking"
                 android:paddingLeft="72dp"
                 android:paddingRight="109dp"
                 android:paddingTop="40dp"
@@ -37,7 +37,7 @@
                 android:paddingBottom="17dp"
                 android:paddingLeft="98dp"
                 android:paddingTop="55dp"
-                android:text="Premier Savings"
+                android:text="Checkings List"
                 android:textColor="#333333"
                 android:textSize="18dp" />
 
@@ -53,7 +53,7 @@
                 android:paddingLeft="98dp"
 
                 android:paddingTop="55dp"
-                android:text="Personal Savings"
+                android:text="Approved Checkings"
                 android:textColor="#333333"
                 android:textSize="18dp" />
 
