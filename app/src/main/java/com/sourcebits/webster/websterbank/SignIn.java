@@ -156,7 +156,7 @@ public class SignIn extends Activity implements View.OnClickListener {
 
     }
 
-//Soap-------------------------
+    //Soap-------------------------
 /*
     private class FirstAsyncTask extends AsyncTask<String,String,String>
     {
@@ -257,6 +257,7 @@ public class SignIn extends Activity implements View.OnClickListener {
             this.mUserName = user;
             this.password = password;
         }
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -265,9 +266,6 @@ public class SignIn extends Activity implements View.OnClickListener {
             //       "Loading... Please wait...", true);
             // Log.d("App", "Pre execute");
         }
-
-
-
 
 
         @Override
@@ -313,7 +311,7 @@ public class SignIn extends Activity implements View.OnClickListener {
                 String requestXml = androidHttpTransport.requestDump;
 // Log.i("envelope", "" + envelope);
                 Log.i("xml", "" + responsexml);
-                 Log.i("xml1", "" + requestXml);
+                Log.i("xml1", "" + requestXml);
 
                 //SoapPrimitive  resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
                 // SoapPrimitive  resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
@@ -321,7 +319,7 @@ public class SignIn extends Activity implements View.OnClickListener {
 
                 System.out.println("resultsRequestSOAP" + resultsRequestSOAP);
                 // savingCont.setText(resultsRequestSOAP.toString());
-                  System.out.println("Response::"+resultsRequestSOAP.toString());
+                System.out.println("Response::" + resultsRequestSOAP.toString());
 
             } catch (Exception e) {
                 System.out.println("Error" + e);
@@ -340,22 +338,22 @@ public class SignIn extends Activity implements View.OnClickListener {
 //        }
 
         @Override
-        protected void onPostExecute(Object o) {
-            super.onPostExecute(o);
+        protected void onPostExecute(Object responseStorage) {
+            super.onPostExecute(responseStorage);
             Log.d("App", "post execute");
 /*
  if (dialog.isShowing()) {
             dialog.dismiss();
         }
  */
-            if(responseStorage)
+          //  if (responseStorage == "SUCCESS")
+            {
+                Intent i = new Intent(SignIn.this, SavingsActivity.class);
+                startActivity(i);
 
-             Intent i = new Intent(SignIn.this, SavingsActivity.class);
-            startActivity(i);
-
-            finish();
+                finish();
+            }
         }
-    }
 /*
     private class myAsyncTask extends AsyncTask<Void, Void, Void> {
 
@@ -517,6 +515,7 @@ public class SignIn extends Activity implements View.OnClickListener {
             mydb.close();
     }
 */
+    }
 }
 
 
