@@ -5,6 +5,7 @@ package com.sourcebits.webster.websterbank;
 import android.app.Activity;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -30,6 +31,7 @@ import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+import java.util.List;
 
 public class SignIn extends Activity implements View.OnClickListener {
     //---------------------Login---------
@@ -119,10 +121,10 @@ public class SignIn extends Activity implements View.OnClickListener {
                         //Soap Object request using async task
 */
 
-                   // myAsyncTask myRequest = new myAsyncTask();
-                   // myRequest.execute();
+                    // myAsyncTask myRequest = new myAsyncTask();
+                    // myRequest.execute();
 
-                    taskAuthenticator=new Authenticator(uname,pass);
+                    taskAuthenticator = new Authenticator(uname, pass);
                     taskAuthenticator.execute();
 
                 }
@@ -155,70 +157,200 @@ public class SignIn extends Activity implements View.OnClickListener {
     }
 
 //Soap-------------------------
-
-
-    private class Authenticator extends AsyncTask{
-
+/*
+    private class FirstAsyncTask extends AsyncTask<String,String,String>
+    {
         private String mUserName, password;
 
         private static final String NAMESPACE = "http://schemas.wbstpoc.com/2015/01/WBSTMobileInterface";
         private static final String URL = "http://12.216.193.170/mobilePOC/?WSDL";
         private static final String SOAP_ACTION = "http://schemas.wbstpoc.com/2015/01/WBSTMobileInterface/";
-        private static final String METHOD_NAME = "getAccountHistory";
+        private static final String METHOD_NAME = "loginUser";
 
-        public Authenticator(String user, String password){
-            this.mUserName=user;
-            this.password=password;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+         //  ProgressDialog dialog;
+           // dialog = ProgressDialog.show(SignIn.this, "",
+              // "Loading... Please wait...", true);
+
+           Log.d("App", "Pre execute");
         }
 
 
         @Override
-        protected Object doInBackground(Object[] objects) {
+        protected String doInBackground(String... strings) {
 
             Log.d("App", "doing in background");
             SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
-            request.addProperty("userName",this.mUserName);
-            request.addProperty("password",this.password);
-
+            request.addProperty("userName", this.mUserName);
+            request.addProperty("password", this.password);
 
 
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
             envelope.setOutputSoapObject(request);
+
+            envelope.implicitTypes = true;
+
             // Says that the soap webservice is a .Net service
+            envelope.dotNet = true;
             envelope.dotNet = true;
 
             HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
 
             try {
                 androidHttpTransport.call(SOAP_ACTION, envelope);
+                String responsexml = androidHttpTransport.responseDump;
+                String requestXml = androidHttpTransport.requestDump;
+// Log.i("envelope", "" + envelope);
+                Log.i("xml", "" + responsexml);
+                Log.i("xml1", "" + requestXml);
 
                 //SoapPrimitive  resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
                 // SoapPrimitive  resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
                 SoapObject resultsRequestSOAP = (SoapObject) envelope.bodyIn;
 
-
-               // savingCont.setText(resultsRequestSOAP.toString());
-              //  System.out.println("Response::"+resultsRequestSOAP.toString());
+                System.out.println("resultsRequestSOAP" + resultsRequestSOAP);
+                // savingCont.setText(resultsRequestSOAP.toString());
+                System.out.println("Response::" + resultsRequestSOAP.toString());
 
             } catch (Exception e) {
-                System.out.println("Error"+e);
+                System.out.println("Error" + e);
             }
 
 
-            return null;
+
+          return resultsRequestSOAP.toString();
+
         }
 
         @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Log.d("App", "post execute");
+
+ //if (dialog.isShowing()) {
+          //  dialog.dismiss();
+        }
+
+
+            Intent i = new Intent(SignIn.this, SavingsActivity.class);
+            startActivity(i);
+
+            finish();
+        }
+
+    }
+*/
+    private class Authenticator extends AsyncTask {
+
+        private String mUserName, password;
+
+        private static final String NAMESPACE = "http://schemas.wbstpoc.com/2015/01/WBSTMobileInterface";
+        private static final String URL = "http://12.216.193.170/mobilePOC/?WSDL";
+        private static final String SOAP_ACTION = "http://schemas.wbstpoc.com/2015/01/WBSTMobileInterface/";
+        private static final String METHOD_NAME = "loginUser";
+
+        public Authenticator(String user, String password) {
+            this.mUserName = user;
+            this.password = password;
+        }
+        @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            Log.d("App", "Pre execute");
+            //   ProgressDialog dialog;
+            // dialog = ProgressDialog.show(SignIn.this, "",
+            //       "Loading... Please wait...", true);
+            // Log.d("App", "Pre execute");
         }
+
+
+
+
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+
+            String responseStorage = null;
+
+            Log.d("App", "doing in background");
+            SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
+            request.addProperty("userName", this.mUserName);
+            request.addProperty("password", this.password);
+
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            envelope.setOutputSoapObject(request);
+
+            envelope.implicitTypes = true;
+
+            // Says that the soap webservice is a .Net service
+            envelope.dotNet = true;
+
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
+
+
+            try {
+                androidHttpTransport.call(SOAP_ACTION, envelope);
+
+
+//                List reqHeaders = null;
+//                List respHeaders = androidHttpTransport.call(SOAP_ACTION, envelope, reqHeaders);
+                //Parsing the HTTP response. HTTP response comes as Key/Value Pair. First Key contains the HTTP response 200 OK.
+//
+//                for (int ix = 0; ix < respHeaders.size(); ix++) {
+//                    HeaderProperty hp = (HeaderProperty) respHeaders.get(ix);
+//                    System.out.println("Header" + ix + "=" + hp.getKey() + " / " + hp.getValue());
+////Looking for HTTP response HTTP 200 OK from the HTTP response. If OK, setting the response status flag as true.
+//                    if (hp.getValue().contains("200 OK"))
+//                        resstatus = true;
+//
+//                }
+
+                String responsexml = androidHttpTransport.responseDump;
+                String requestXml = androidHttpTransport.requestDump;
+// Log.i("envelope", "" + envelope);
+                Log.i("xml", "" + responsexml);
+                 Log.i("xml1", "" + requestXml);
+
+                //SoapPrimitive  resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
+                // SoapPrimitive  resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
+                SoapObject resultsRequestSOAP = (SoapObject) envelope.bodyIn;
+
+                System.out.println("resultsRequestSOAP" + resultsRequestSOAP);
+                // savingCont.setText(resultsRequestSOAP.toString());
+                  System.out.println("Response::"+resultsRequestSOAP.toString());
+
+            } catch (Exception e) {
+                System.out.println("Error" + e);
+            }
+
+            return responseStorage;
+        }
+
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//         //   ProgressDialog dialog;
+//           // dialog = ProgressDialog.show(SignIn.this, "",
+//             //       "Loading... Please wait...", true);
+//           // Log.d("App", "Pre execute");
+//        }
 
         @Override
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
             Log.d("App", "post execute");
-            Intent i = new Intent(SignIn.this, SavingsActivity.class);
+/*
+ if (dialog.isShowing()) {
+            dialog.dismiss();
+        }
+ */
+            if(responseStorage)
+
+             Intent i = new Intent(SignIn.this, SavingsActivity.class);
             startActivity(i);
 
             finish();
@@ -385,6 +517,6 @@ public class SignIn extends Activity implements View.OnClickListener {
             mydb.close();
     }
 */
-    }
+}
 
 

@@ -84,8 +84,9 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:onClick="onClick"
+        android:background="#ffffff"
         android:paddingLeft="10dp"
-        android:text="Savings" />
+        android:text="Remember Username" />
 
     <ToggleButton
         android:layout_width="wrap_content"
@@ -94,7 +95,8 @@
         android:id="@+id/toggleButton"
         android:layout_alignBottom="@+id/Savings"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:background="#ffffff"/>
 
 
 </RelativeLayout>
