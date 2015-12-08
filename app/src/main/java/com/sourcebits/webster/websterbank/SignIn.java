@@ -20,13 +20,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.ksoap2.HeaderProperty;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.SoapFault;
 import org.ksoap2.serialization.PropertyInfo;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
-import org.ksoap2.transport.AndroidHttpTransport;
+//import org.ksoap2.transport.AndroidHttpTransport;
 import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -272,6 +273,7 @@ public class SignIn extends Activity implements View.OnClickListener {
         protected Object doInBackground(Object[] objects) {
 
             String responseStorage = null;
+            boolean resstatus;
 
             Log.d("App", "doing in background");
             SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
@@ -291,42 +293,44 @@ public class SignIn extends Activity implements View.OnClickListener {
 
 
             try {
-                androidHttpTransport.call(SOAP_ACTION, envelope);
+                //androidHttpTransport.call(SOAP_ACTION, envelope);
 
 
-//                List reqHeaders = null;
-//                List respHeaders = androidHttpTransport.call(SOAP_ACTION, envelope, reqHeaders);
+                List reqHeaders = null;
+                List respHeaders = androidHttpTransport.call(SOAP_ACTION, envelope, reqHeaders);
                 //Parsing the HTTP response. HTTP response comes as Key/Value Pair. First Key contains the HTTP response 200 OK.
-//
-//                for (int ix = 0; ix < respHeaders.size(); ix++) {
-//                    HeaderProperty hp = (HeaderProperty) respHeaders.get(ix);
-//                    System.out.println("Header" + ix + "=" + hp.getKey() + " / " + hp.getValue());
+
+                for (int ix = 0; ix < respHeaders.size(); ix++) {
+                    HeaderProperty hp = (HeaderProperty) respHeaders.get(ix);
+                    System.out.println("Header" + ix + "=" + hp.getKey() + " / " + hp.getValue());
 ////Looking for HTTP response HTTP 200 OK from the HTTP response. If OK, setting the response status flag as true.
-//                    if (hp.getValue().contains("200 OK"))
-//                        resstatus = true;
+                    if (hp.getValue().contains("200 OK"))
+                        resstatus = true;
 //
 //                }
 
-                String responsexml = androidHttpTransport.responseDump;
-                String requestXml = androidHttpTransport.requestDump;
+                    String responsexml = androidHttpTransport.responseDump;
+                    String requestXml = androidHttpTransport.requestDump;
 // Log.i("envelope", "" + envelope);
-                Log.i("xml", "" + responsexml);
-                Log.i("xml1", "" + requestXml);
+                    Log.i("xml", "" + responsexml);
+                    Log.i("xml1", "" + requestXml);
 
-                //SoapPrimitive  resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
-                // SoapPrimitive  resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
-                SoapObject resultsRequestSOAP = (SoapObject) envelope.bodyIn;
+                    //SoapPrimitive  resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
+                    // SoapPrimitive  resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
+                    SoapObject resultsRequestSOAP = (SoapObject) envelope.bodyIn;
 
-                System.out.println("resultsRequestSOAP" + resultsRequestSOAP);
-                // savingCont.setText(resultsRequestSOAP.toString());
-                System.out.println("Response::" + resultsRequestSOAP.toString());
+                    System.out.println("resultsRequestSOAP" + resultsRequestSOAP);
+                    // savingCont.setText(resultsRequestSOAP.toString());
+                    System.out.println("Response::" + resultsRequestSOAP.toString());
 
-            } catch (Exception e) {
-                System.out.println("Error" + e);
-            }
+                }
 
-            return responseStorage;
-        }
+                return responseStorage;
+            } catch (XmlPullParserException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } return responseStorage;
 
 //        @Override
 //        protected void onPreExecute() {
@@ -336,7 +340,7 @@ public class SignIn extends Activity implements View.OnClickListener {
 //             //       "Loading... Please wait...", true);
 //           // Log.d("App", "Pre execute");
 //        }
-
+        }
         @Override
         protected void onPostExecute(Object responseStorage) {
             super.onPostExecute(responseStorage);
@@ -346,7 +350,7 @@ public class SignIn extends Activity implements View.OnClickListener {
             dialog.dismiss();
         }
  */
-          //  if (responseStorage == "SUCCESS")
+            //  if (responseStorage == "SUCCESS")
             {
                 Intent i = new Intent(SignIn.this, SavingsActivity.class);
                 startActivity(i);

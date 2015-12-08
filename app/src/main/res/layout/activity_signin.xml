@@ -18,7 +18,7 @@
 
         android:paddingLeft="20dp"
         android:paddingTop="16dp"
-        android:text="welcome to webster"
+        android:text="Welcome to Webster Bank"
         android:textColor="#deffffff"
         android:textSize="30dp" />
 
@@ -36,7 +36,8 @@
 
         android:paddingTop="55dp"
         android:text="Sign In"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:textColor="#333333"/>
 
 
     <EditText
