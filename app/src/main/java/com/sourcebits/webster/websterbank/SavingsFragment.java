@@ -17,6 +17,12 @@ import org.ksoap2.transport.HttpTransportSE;
  * Created by Bhargava Gugamsetty on 11/27/2015.
  */
 public class SavingsFragment extends Fragment {
+  //  private savingsAuthenticator;
+//    private
+  //  private
+
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,4 +35,12 @@ public class SavingsFragment extends Fragment {
 
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        //savingsAuthenticator = new savingsAuthenticator(uname, pass);
+      //  savingsAuthenticator.execute();
+
+    }
 }
