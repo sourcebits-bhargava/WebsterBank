@@ -26,7 +26,7 @@ import java.util.List;
  */
 public class SavingsFragment extends Fragment {
     private SavingsAuthenticator savingsAuthenticator;
-    private String userId;
+    private String userId="1001";
 //    private
     //  private
 
@@ -43,7 +43,7 @@ public class SavingsFragment extends Fragment {
 
 
     }
-
+/*
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,23 +52,33 @@ public class SavingsFragment extends Fragment {
         //  savingsAuthenticator.execute();
         /*
         getAccounts
-          */
-     //   Intent i = getIntent();
-       // i.getStringExtra("userId");
+
+        //   Intent i = getIntent();
+        // i.getStringExtra("userId");
 
 
     }
-
+*/
     private class SavingsAuthenticator extends AsyncTask {
-        private String userId="1001";
 
+        //TAGS FOR XML
+        private static final String TAG_ACCOUNTS = "account";
+        private static final String TAG_TYPE = "type";
+        private static final String TAG_NUMBER = "number";
+        private static final String TAG_DISPLAY_NAME = "Personal Savings";
+        private static final String TAG_NICKNAME = "My Pers Savings";
+        private static final String TAG_CURRENT_BAL = "currentBalance";
+        private static final String TAG_AVAILABLE_BAL = "availableBalance";
+
+        //soAP
+        private String userId = "1001";
         private static final String NAMESPACE = "http://schemas.wbstpoc.com/2015/01/WBSTMobileInterface";
         private static final String URL = "http://12.216.193.170/mobilePOC/?WSDL";
         private static final String SOAP_ACTION = "http://schemas.wbstpoc.com/2015/01/WBSTMobileInterface/";
         private static final String METHOD_NAME = "getAccounts";
 
         public SavingsAuthenticator(String userId) {
-            this.userId=userId;
+            this.userId = userId;
         }
 
 
@@ -83,8 +93,7 @@ public class SavingsFragment extends Fragment {
             boolean resstatus;
             Log.d("App", "doing in background");
             SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
-            request.addProperty("userID", this.userId);
-
+            request.addProperty("userId", 1001);
 
 
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -139,18 +148,19 @@ public class SavingsFragment extends Fragment {
                 }
 
 
-
             } catch (XmlPullParserException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
-            }return responseAccounts;
+            }
+            return responseAccounts;
 
 
         }
+
         @Override
-        protected void onPostExecute (Object o){
-            super.onPostExecute(o);
+        protected void onPostExecute(Object responseAccounts) {
+            super.onPostExecute(responseAccounts);
 
         }
     }

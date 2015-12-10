@@ -155,7 +155,8 @@ public class SignIn extends Activity implements View.OnClickListener {
                 List respHeaders = androidHttpTransport.call(SOAP_ACTION, envelope, reqHeaders);
                 //Parsing the HTTP response. HTTP response comes as Key/Value Pair. First Key contains the HTTP response 200 OK.
 
-                for (int ix = 0; ix < respHeaders.size(); ix++) {
+               // for (int ix = 0; ix < respHeaders.size(); ix++) {
+                    for (int ix = 0; ix < 1; ix++) {
                     HeaderProperty hp = (HeaderProperty) respHeaders.get(ix);
                     System.out.println("Header" + ix + "=" + hp.getKey() + " / " + hp.getValue());
 ////Looking for HTTP response HTTP 200 OK from the HTTP response. If OK, setting the response status flag as true.
@@ -285,7 +286,7 @@ public class SignIn extends Activity implements View.OnClickListener {
                 List respHeaders = androidHttpTransport.call(SOAP_ACTION, envelope, reqHeaders);
                 //Parsing the HTTP response. HTTP response comes as Key/Value Pair. First Key contains the HTTP response 200 OK.
 
-                for (int ix = 0; ix < respHeaders.size(); ix++) {
+                for (int ix = 0; ix < 1; ix++) {
                     HeaderProperty hp = (HeaderProperty) respHeaders.get(ix);
                     System.out.println("Header" + ix + "=" + hp.getKey() + " / " + hp.getValue());
 ////Looking for HTTP response HTTP 200 OK from the HTTP response. If OK, setting the response status flag as true.
