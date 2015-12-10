@@ -307,24 +307,27 @@ public class SignIn extends Activity implements View.OnClickListener {
                     System.out.println("Response::" + resultsRequestSOAP.toString());
                     responseUserId=(resultsRequestSOAP.toString());
 
-                    if ((responseUserId== "userId=1001"))
-                    {
-//
+                  //  if ((responseUserId== "authenticateResponse{status=SUCCEES; userId=1001; }"))
+                //    {
+///*
+                 /*   Intent i = new Intent(SignIn.this, SavingsActivity.class);
+                    startActivity(i);
+                    finish();
+*/
+                     //   Toast.makeText(getApplicationContext(), "Authentication success", Toast.LENGTH_SHORT).show();
 
-                        Toast.makeText(getApplicationContext(), "Authentication success", Toast.LENGTH_SHORT).show();
 
 
 
-
-                    }
-                    else
-                        break;
+                //    }
+                    //else
+                      //  break;
 
 
 
                 }
 
-                return responseStatus;
+               // return responseStatus;
             } catch (XmlPullParserException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -341,11 +344,12 @@ public class SignIn extends Activity implements View.OnClickListener {
         protected void onPostExecute(Object responseStatus) {
             super.onPostExecute(responseStatus);
 
-            if (responseStatus == "1001")
+          //  if (responseStatus == "1001")
 
             {
 
                Intent i = new Intent(SignIn.this, SavingsActivity.class);
+             //   i.putExtra("userId", 1001);
               startActivity(i);
              finish();
              }
